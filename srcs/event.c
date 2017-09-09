@@ -70,6 +70,7 @@ int		key_pressed(int kc, t_gen *g)
 	double oldplan;
 
 	key_pressed_deplace(kc, g, 0, 0);
+	key_pressed_color(kc, g);
 	if (kc == 0)
 	{
 		olddir = g->dirx;

@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpinson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/09 18:03:50 by mpinson           #+#    #+#             */
+/*   Updated: 2017/09/09 18:03:53 by mpinson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf.h"
-
-#include <stdio.h>
-
-
-void	ft_clear(t_gen *g)
-{
-	int i;
-
-	i = 0;
-	while(i < H * W * 4)
-	{
-		g->img_ptr[i] = 0;
-		g->img_ptr[i + 1] = 0;
-		g->img_ptr[i + 2] = 0;
-		g->img_ptr[i + 3] = 0;
-		i += 4;
-	}
-}
 
 int		red_cross(t_gen *g)
 {
@@ -25,46 +19,25 @@ int		red_cross(t_gen *g)
 	return (0);
 }
 
-int		check_img(t_gen *g)
+void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan)
 {
-	int i;
-	int is_no;
-
-	i = 0;
-	is_no = 1;
-	while(i < H * W * 4 - 4)
-	{
-		if(g->img_ptr[i] != 0 || g->img_ptr[i + 1] != 0 || g->img_ptr[i + 2] != 0 || g->img_ptr[i + 3] != 0)
-			is_no = 0;
-		i += 4;
-	}
-	return(is_no);
-}
-
-int		key_pressed(int kc, t_gen *g)
-{
-	double olddir;
-	double oldplan;
-
-	(void)g;
 	if (kc == 53)
 		exit(0);
-	
-	if(kc == 13) //w
+	if (kc == 13)
 	{
-		if(g->map[(int)(g->posx + g->dirx * g->sprint)][(int)g->posy] == 0)
+		if (g->map[(int)(g->posx + g->dirx * g->sprint)][(int)g->posy] == 0)
 			g->posx += g->dirx * g->sprint;
-		if(g->map[(int)g->posx][(int)(g->posy + g->diry * g->sprint)] == 0)
+		if (g->map[(int)g->posx][(int)(g->posy + g->diry * g->sprint)] == 0)
 			g->posy += g->diry * g->sprint;
 	}
-	if(kc == 1) //s
+	if (kc == 1)
 	{
-		if(g->map[(int)(g->posx - g->dirx * 0.1)][(int)g->posy] == 0)
+		if (g->map[(int)(g->posx - g->dirx * 0.1)][(int)g->posy] == 0)
 			g->posx -= g->dirx * 0.1;
-		if(g->map[(int)g->posx][(int)(g->posy - g->diry * 0.1)] == 0)
+		if (g->map[(int)g->posx][(int)(g->posy - g->diry * 0.1)] == 0)
 			g->posy -= g->diry * 0.1;
 	}
-	if(kc == 2) //d
+	if (kc == 2)
 	{
 		olddir = g->dirx;
 		g->dirx = g->dirx * cos(-0.1) - g->diry * sin(-0.1);
@@ -73,19 +46,10 @@ int		key_pressed(int kc, t_gen *g)
 		g->planx = g->planx * cos(-0.1) - g->plany * sin(-0.1);
 		g->plany = oldplan * sin(-0.1) + g->plany * cos(-0.1);
 	}
-	if(kc == 0) //a
-	{
-		olddir = g->dirx;
-		g->dirx = g->dirx * cos(0.1) - g->diry * sin(0.1);
-		g->diry = olddir * sin(0.1) + g->diry * cos(0.1);
-		oldplan = g->planx;
-		g->planx = g->planx * cos(0.1) - g->plany * sin(0.1);
-		g->plany = oldplan * sin(0.1) + g->plany * cos(0.1);
-	}
-	if(kc == 117)
-	{
-		ft_init_str(g);
-	}
+}
+
+void	key_pressed_color(int kc, t_gen *g)
+{
 	if (kc == 89)
 		g->red2++;
 	if (kc == 86)
@@ -98,15 +62,54 @@ int		key_pressed(int kc, t_gen *g)
 		g->blue2++;
 	if (kc == 88)
 		g->blue2--;
-	if(kc == 257 && g->sprint == 0.1)
-		g->sprint = 0.5;
-	else if(kc == 257 && g->sprint == 0.5)
-		g->sprint = 0.1;
-	printf("x = %d\n", kc);
-	if(g->posx > 18 && g->posx < 19 && g->posy > 5.5 && g->posy < 6)
+}
+
+int		key_pressed(int kc, t_gen *g)
+{
+	double olddir;
+	double oldplan;
+
+	key_pressed_deplace(kc, g, 0, 0);
+	if (kc == 0)
 	{
-		g->posx += 8;
+		olddir = g->dirx;
+		g->dirx = g->dirx * cos(0.1) - g->diry * sin(0.1);
+		g->diry = olddir * sin(0.1) + g->diry * cos(0.1);
+		oldplan = g->planx;
+		g->planx = g->planx * cos(0.1) - g->plany * sin(0.1);
+		g->plany = oldplan * sin(0.1) + g->plany * cos(0.1);
 	}
+	if (kc == 117)
+		ft_init_str(g);
+	if (kc == 257 && g->sprint == 0.1)
+		g->sprint = 0.5;
+	else if (kc == 257 && g->sprint == 0.5)
+		g->sprint = 0.1;
+	if (g->posx > 18 && g->posx < 19 && g->posy > 5.5 && g->posy < 6)
+		g->posx += 8;
 	ft_start_algo(g);
 	return (0);
+}
+
+void	ft_putpixel_in_img(int x, int y, t_gen *g, unsigned int color)
+{
+	if ((unsigned long long int)((x * 4) + (y * W * 4)) >
+			(unsigned long long int)(W * H * 4) ||
+			(unsigned long long int)((x * 4) + (y * W * 4))
+			<= 0 || x > W || x < 0 || y < 0 || y > H)
+		return ;
+	if (color == 0)
+	{
+		g->img_ptr[(x * 4) + (y * W * 4)] = 0;
+		g->img_ptr[(x * 4) + (y * W * 4) + 1] = 0;
+		g->img_ptr[(x * 4) + (y * W * 4) + 2] = 0;
+		g->img_ptr[(x * 4) + (y * W * 4) + 3] = 0;
+	}
+	else
+	{
+		g->img_ptr[(x * 4) + (y * W * 4)] = g->blue + g->blue2;
+		g->img_ptr[(x * 4) + (y * W * 4) + 1] = g->green + g->green2;
+		g->img_ptr[(x * 4) + (y * W * 4) + 2] = g->red + g->red2;
+		g->img_ptr[(x * 4) + (y * W * 4) + 3] = 0;
+	}
 }

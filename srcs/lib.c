@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lib.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpinson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/09 18:03:59 by mpinson           #+#    #+#             */
+/*   Updated: 2017/09/09 18:04:01 by mpinson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf.h"
 
 long	ft_atol(const char *str)
@@ -66,32 +78,9 @@ int		init(t_gen *g)
 	if (!(g->img = mlx_new_image(g->mlx, W, H)))
 		return (-1);
 	if (!(g->img_ptr = mlx_get_data_addr(g->img, &(g->bpp),
-		&(g->s_l), &(g->endian))))
+					&(g->s_l), &(g->endian))))
 		return (-1);
 	if (!(g->win = mlx_new_window(g->mlx, W, H, "wolf3D")))
 		return (-1);
 	return (0);
-}
-
-void	ft_putpixel_in_img(int x, int y, t_gen *g, unsigned int color)
-{
-	if ((unsigned long long int)((x * 4) + (y * W * 4)) >
-			(unsigned long long int)(W * H * 4) ||
-			(unsigned long long int)((x * 4) + (y * W * 4))
-			<= 0 || x > W || x < 0 || y < 0 || y > H)
-		return ;
-	if (color == 0)
-	{
-		g->img_ptr[(x * 4) + (y * W * 4)] = 0;
-		g->img_ptr[(x * 4) + (y * W * 4) + 1] = 0;
-		g->img_ptr[(x * 4) + (y * W * 4) + 2] = 0;
-		g->img_ptr[(x * 4) + (y * W * 4) + 3] = 0;
-	}
-	else
-	{
-		g->img_ptr[(x * 4) + (y * W * 4)] = g->blue + g->blue2;
-		g->img_ptr[(x * 4) + (y * W * 4) + 1] = g->green + g->green2;
-		g->img_ptr[(x * 4) + (y * W * 4) + 2] = g->red + g->red2;
-		g->img_ptr[(x * 4) + (y * W * 4) + 3] = 0;
-	}
 }

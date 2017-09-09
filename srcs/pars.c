@@ -1,5 +1,7 @@
 #include "wolf.h"
 
+#include <stdio.h>
+
 int	ft_check(char *str)
 {
 	char	**tab;
@@ -33,23 +35,12 @@ int	go_malloc1(char **tab, int y, t_gen *g)
 	int i;
 
 	i = 0;
-	g->color = 42;
-	if (!(g->ad_x[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
-		return (-1);
-	if (!(g->ad_y[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
-		return (-1);
-	if (!(g->ad_z[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
-		return (-1);
-	if (!(g->bd_x[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
-		return (-1);
-	if (!(g->bd_y[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
+	if (!(g->map[y] = malloc(sizeof(int) * ft_strlen_tab(tab))))
 		return (-1);
 	i = 0;
 	while (i < ft_strlen_tab(tab))
 	{
-		g->ad_z[y][i] = ft_atoi(tab[i]);
-		g->ad_y[y][i] = y * 10;
-		g->ad_x[y][i] = i * 10;
+		g->map[y][i] = ft_atoi(tab[i]);
 		free(tab[i]);
 		i++;
 	}
@@ -64,9 +55,6 @@ int	ft_init(t_gen *g, char *pass)
 	int		y;
 
 	y = 0;
-	g->zoom = 2;
-	g->yrot = -1;
-	g->xrot = 0;
 	if ((fd = open(pass, O_RDONLY)) == -1)
 		return (-1);
 	while (get_next_line(fd, &test) > 0)
@@ -78,7 +66,7 @@ int	ft_init(t_gen *g, char *pass)
 		y++;
 	}
 	g->larg_y = ft_strlen_tab(tab);
-	if(g->larg_y <= 2) //<= 2 taille map
+	if(g->larg_y <= 21) //<= 2 taille map
 		return(-1);
 	close(fd);
 	free(test);
@@ -89,15 +77,7 @@ int	go_malloc2(t_gen *g, int lang)
 {
 	if (lang == -1)
 		return (-1);
-	if (!(g->ad_x = malloc(sizeof(int *) * g->larg_x)))
-		return (-1);
-	if (!(g->ad_y = malloc(sizeof(int *) * g->larg_x)))
-		return (-1);
-	if (!(g->ad_z = malloc(sizeof(int *) * g->larg_x)))
-		return (-1);
-	if (!(g->bd_x = malloc(sizeof(int *) * g->larg_x)))
-		return (-1);
-	if (!(g->bd_y = malloc(sizeof(int *) * g->larg_x)))
+	if (!(g->map = malloc(sizeof(int *) * g->larg_x)))
 		return (-1);
 	return (0);
 }
@@ -105,21 +85,19 @@ int	go_malloc2(t_gen *g, int lang)
 int ft_last_check(t_gen *g)
 {
 	int x;
-	int y;
 
 	x = 0;
-	y = 0;
 	while(x < g->larg_y - 1)
 	{
-		if(g->ad_z[0][x] == 0 || g->ad_z[g->larg_x - 1][x] == 0)
+		if(g->map[0][x] == 0 || g->map[g->larg_x - 1][x] == 0)
 			return(-1);
 		x++;
 	}
 	x = 0;
+	printf("oui\n");
 	while(x < g->larg_x - 1)
 	{
-		y = 0;
-		if(g->ad_z[x][0] == 0 || g->ad_z[x][g->larg_x - 1] == 0)
+		if(g->map[x][0] == 0 || g->map[x][g->larg_y - 1] == 0)
 			return(-1);
 		x++;
 	}
@@ -143,7 +121,7 @@ int	ft_pars(t_gen *g, char *pass)
 		lang = ft_strlen_s(test);
 		free(test);
 	}
-	if (g->larg_x <= 2 || go_malloc2(g, lang) == -1)   //<= 2 taille map
+	if (g->larg_x <= 21 || go_malloc2(g, lang) == -1)   //<= 2 taille map
 		return (-1);
 	close(fd);
 	if(ft_init(g, pass) == -1)

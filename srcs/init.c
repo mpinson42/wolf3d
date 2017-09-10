@@ -86,4 +86,18 @@ void	ft_init_str(t_gen *g)
 	g->sprint = 0.1;
 }
 
-
+void	init_algo(t_gen *g, int x)
+{
+	g->camerax = 2 * x / (double)W - 1;
+	g->rayposx = g->posx;
+	g->rayposy = g->posy;
+	g->raydirx = g->dirx + g->planx * g->camerax;
+	g->raydiry = g->diry + g->plany * g->camerax;
+	g->mapx = g->rayposx;
+	g->mapy = g->rayposy;
+	g->deltadistx = sqrt(1 + (g->raydiry * g->raydiry)
+		/ (g->raydirx * g->raydirx));
+	g->deltadisty = sqrt(1 + (g->raydirx * g->raydirx)
+		/ (g->raydiry * g->raydiry));
+	g->hit = 0;
+}

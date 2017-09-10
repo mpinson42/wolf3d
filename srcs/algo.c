@@ -35,7 +35,7 @@ void	calcule(t_gen *g)
 		g->sidedisty = (g->mapy + 1.0 - g->rayposy) * g->deltadisty;
 	}
 }
-#include <stdio.h>
+
 void	calcule2(t_gen *g)
 {
 	while (g->hit == 0)

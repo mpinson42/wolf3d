@@ -58,27 +58,8 @@ void	ft_setimage(t_gen *g)
 	}
 }
 
-void	init_algo(t_gen *g, int x)
+int main2(int argc, char **argv, t_gen *g)
 {
-	g->camerax = 2 * x / (double)W - 1;
-	g->rayposx = g->posx;
-	g->rayposy = g->posy;
-	g->raydirx = g->dirx + g->planx * g->camerax;
-	g->raydiry = g->diry + g->plany * g->camerax;
-	g->mapx = g->rayposx;
-	g->mapy = g->rayposy;
-	g->deltadistx = sqrt(1 + (g->raydiry * g->raydiry)
-		/ (g->raydirx * g->raydirx));
-	g->deltadisty = sqrt(1 + (g->raydirx * g->raydirx)
-		/ (g->raydiry * g->raydiry));
-	g->hit = 0;
-}
-
-int		main(int argc, char **argv)
-{
-	t_gen g;
-
-	ft_bzero(&g, sizeof(g));
 	if ((argc != 2 && argc != 3) || argv[1][ft_strlen(argv[1]) - 1] != 'l'
 			|| argv[1][ft_strlen(argv[1]) - 2] != 'o'
 			|| argv[1][ft_strlen(argv[1]) - 3] != 'w'
@@ -87,19 +68,28 @@ int		main(int argc, char **argv)
 		ft_putstr("need file .wol");
 		return (0);
 	}
-	if (ft_pars(&g, argv[1]) == -1)
+	if (ft_pars(g, argv[1]) == -1)
 	{
 		ft_putstr("error");
 		return (0);
 	}
-	g.path_save = ft_strdup("./save/save.sa");
-	if ((argc == 3) && (argv[2][ft_strlen(argv[2]) - 1] != 'a' ||
-		argv[2][ft_strlen(argv[2]) - 2] != 's' ||
-		argv[2][ft_strlen(argv[2]) - 3] != '.'))
+	g->path_save = ft_strdup("./save/save.sa");
+	if ((argc == 3) && (argv[2][ft_strlen(argv[2]) - 1] == 'a' &&
+		argv[2][ft_strlen(argv[2]) - 2] == 's' &&
+		argv[2][ft_strlen(argv[2]) - 3] == '.'))
 	{
-		g.path_save = ft_strdup(argv[2]);
-		return (0);
+		g->path_save = ft_strdup(argv[2]);
 	}
+	return (1);
+}
+
+int		main(int argc, char **argv)
+{
+	t_gen g;
+
+	ft_bzero(&g, sizeof(g));
+	if(main2(argc, argv, &g) == 0)
+		return (0);
 	if (init(&g) == -1)
 		return (0);
 	ft_init_str(&g);

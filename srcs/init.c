@@ -38,10 +38,45 @@ int		ft_init(t_gen *g, char *pass)
 	return (0);
 }
 
+void	ft_chr42(t_gen *g)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < g->larg_x)
+	{
+		y = 0;
+		while (y < g->larg_y)
+		{
+			if (g->map[x][y] == 42)
+			{
+				g->posx = x + 0.5;
+				g->posy = y + 0.5;
+				g->old_posx = x + 0.5;
+				g->old_posy = y + 0.5;
+				g->map[x][y] = 0;
+				return ;
+			}
+			y++;
+		}
+		x++;
+	}
+	exit(0);
+}
+
 void	ft_init_str(t_gen *g)
 {
-	g->posx = 22;
-	g->posy = 12;
+	static int i = 0;
+
+	if (i == 0)
+		ft_chr42(g);
+	else
+	{
+		g->posx = g->old_posx;
+		g->posy = g->old_posy;
+	}
+	i = 1;
 	g->dirx = -1;
 	g->diry = 0;
 	g->planx = 0;
@@ -50,3 +85,5 @@ void	ft_init_str(t_gen *g)
 	g->oldtime = 0;
 	g->sprint = 0.1;
 }
+
+

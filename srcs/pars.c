@@ -73,14 +73,16 @@ int	ft_last_check(t_gen *g)
 	x = 0;
 	while (x < g->larg_y - 1)
 	{
-		if (g->map[0][x] == 0 || g->map[g->larg_x - 1][x] == 0)
+		if (g->map[0][x] == 0 || g->map[g->larg_x - 1][x] == 0
+			|| g->map[0][x] == 42 || g->map[g->larg_x - 1][x] == 42)
 			return (-1);
 		x++;
 	}
 	x = 0;
 	while (x < g->larg_x - 1)
 	{
-		if (g->map[x][0] == 0 || g->map[x][g->larg_y - 1] == 0)
+		if (g->map[x][0] == 0 || g->map[x][g->larg_y - 1] == 0
+			|| g->map[x][0] == 42 || g->map[x][g->larg_y - 1] == 42)
 			return (-1);
 		x++;
 	}

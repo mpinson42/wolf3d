@@ -35,7 +35,7 @@ void	calcule(t_gen *g)
 		g->sidedisty = (g->mapy + 1.0 - g->rayposy) * g->deltadisty;
 	}
 }
-
+#include <stdio.h>
 void	calcule2(t_gen *g)
 {
 	while (g->hit == 0)
@@ -52,6 +52,7 @@ void	calcule2(t_gen *g)
 			g->mapy += g->stepy;
 			g->side = 1;
 		}
+	
 		if (g->map[g->mapx][g->mapy] > 0)
 			g->hit = 1;
 	}
@@ -138,6 +139,5 @@ void	ft_start_algo(t_gen *g)
 		ft_verline(x, g->drawstart, g->drawend, g);
 		x++;
 	}
-	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
-	ft_menu(g);
+	affiche(g);
 }

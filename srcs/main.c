@@ -79,7 +79,7 @@ int		main(int argc, char **argv)
 	t_gen g;
 
 	ft_bzero(&g, sizeof(g));
-	if (argc != 2 || argv[1][ft_strlen(argv[1]) - 1] != 'l'
+	if ((argc != 2 && argc != 3) || argv[1][ft_strlen(argv[1]) - 1] != 'l'
 			|| argv[1][ft_strlen(argv[1]) - 2] != 'o'
 			|| argv[1][ft_strlen(argv[1]) - 3] != 'w'
 			|| argv[1][ft_strlen(argv[1]) - 4] != '.')
@@ -92,9 +92,19 @@ int		main(int argc, char **argv)
 		ft_putstr("error");
 		return (0);
 	}
+	g.path_save = ft_strdup("./save/save.sa");
+	if ((argc == 3) && (argv[2][ft_strlen(argv[2]) - 1] != 'a' ||
+		argv[2][ft_strlen(argv[2]) - 2] != 's' ||
+		argv[2][ft_strlen(argv[2]) - 3] != '.'))
+	{
+		g.path_save = ft_strdup(argv[2]);
+		return (0);
+	}
 	if (init(&g) == -1)
 		return (0);
 	ft_init_str(&g);
+	if (argc == 3)
+		load(&g);
 	ft_start_algo(&g);
 	mlx_hook(g.win, 2, 1L << 0, &key_pressed, &g);
 	mlx_hook(g.win, 17, (1L << 17), &red_cross, &g);

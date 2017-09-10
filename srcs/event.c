@@ -21,8 +21,6 @@ int		red_cross(t_gen *g)
 
 void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan)
 {
-	if (kc == 53)
-		exit(0);
 	if (kc == 13)
 	{
 		if (g->map[(int)(g->posx + g->dirx * g->sprint)][(int)g->posy] == 0)
@@ -69,8 +67,10 @@ int		key_pressed(int kc, t_gen *g)
 	double olddir;
 	double oldplan;
 
-	key_pressed_deplace(kc, g, 0, 0);
-	key_pressed_color(kc, g);
+	if (key_menu1(kc, g) == 0)
+		return (0);
+	if (g->posx > 24 && g->posx < 25 && g->posy > 22 && g->posy < 23)
+		g->map[23][22] = 0;
 	if (kc == 0)
 	{
 		olddir = g->dirx;
@@ -80,8 +80,7 @@ int		key_pressed(int kc, t_gen *g)
 		g->planx = g->planx * cos(0.1) - g->plany * sin(0.1);
 		g->plany = oldplan * sin(0.1) + g->plany * cos(0.1);
 	}
-	if (kc == 117)
-		ft_init_str(g);
+	kc == 117 ? ft_init_str(g) : 0;
 	if (kc == 257 && g->sprint == 0.1)
 		g->sprint = 0.5;
 	else if (kc == 257 && g->sprint == 0.5)

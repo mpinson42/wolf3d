@@ -28,6 +28,9 @@ typedef	struct		s_gen
 	void			*win;
 	void			*mlx;
 	void			*img;
+	void			*cursor;
+	int				cursor_x;
+	int				cursor_y;
 	char			*img_ptr;
 	int				bpp;
 	int				s_l;
@@ -66,9 +69,21 @@ typedef	struct		s_gen
 	int				drawstart;
 	int				drawend;
 	double			sprint;
+	int				hidd_menu;
+
+	int menu_mod;
+	int pos_curseur;
+	char *path_save;
+	double old_posx;
+	double old_posy;
 }					t_gen;
 
 int					ft_pars(t_gen *g, char *pass);
+void	load(t_gen *g);
+int		key_menu1(int kc, t_gen *g);
+void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan);
+void	key_pressed_color(int kc, t_gen *g);
+void	affiche(t_gen *g);
 void				ft_free_tab(char **tab);
 int					ft_strlen_tab(char **tab);
 int					ft_strlen_s(char *str);

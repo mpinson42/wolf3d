@@ -82,7 +82,8 @@ int		key_menu2(int kc, t_gen *g)
 
 int		key_menu1(int kc, t_gen *g)
 {
-	kc == 53 ? exit(0) : 0;
+	kc == 53 && g->menu_mod == 0 ? exit(0) : 0;
+	kc == 53 && g->menu_mod == 1 ? g->menu_mod = 0 : 0;
 	if (kc == 126 && g->menu_mod == 1)
 	{
 		g->pos_curseur--;

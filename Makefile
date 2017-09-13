@@ -17,7 +17,7 @@ $(NAME): $(SRC)
 	@make -C ./minilibx_macos all
 	@cp ./minilibx_macos/libmlx.a ./lib
 	@cp ./libft/libft.a ./lib
-	gcc  $(FLAGS)  -g -I ./include/  -L./lib  -lft -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(SRC)
+	gcc  $(FLAGS) -I ./include/  -L./lib  -lft -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(SRC)
 
 
 clean:

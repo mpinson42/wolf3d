@@ -19,6 +19,9 @@ void	ft_menu(t_gen *g)
 	mlx_string_put(g->mlx, g->win, 0, 30, 0x00FFFFFF, "echap quiter");
 	mlx_string_put(g->mlx, g->win, 0, 45, 0x00FFFFFF, "shift sprint");
 	mlx_string_put(g->mlx, g->win, 0, 60, 0x00FFFFFF, "del reset");
+	mlx_string_put(g->mlx, g->win, 0, 75, 0x00FFFFFF, "entre menu");
+	mlx_string_put(g->mlx, g->win, 0, 90, 0x00FFFFFF, "! tuto");
+	mlx_string_put(g->mlx, g->win, 0, 105, 0x00FFFFFF, "m map");
 }
 
 void	ft_verline(int x, int start, int end, t_gen *g)
@@ -58,7 +61,7 @@ void	ft_setimage(t_gen *g)
 	}
 }
 
-int main2(int argc, char **argv, t_gen *g)
+int		main2(int argc, char **argv, t_gen *g)
 {
 	if ((argc != 2 && argc != 3) || argv[1][ft_strlen(argv[1]) - 1] != 'l'
 			|| argv[1][ft_strlen(argv[1]) - 2] != 'o'
@@ -88,7 +91,7 @@ int		main(int argc, char **argv)
 	t_gen g;
 
 	ft_bzero(&g, sizeof(g));
-	if(main2(argc, argv, &g) == 0)
+	if (main2(argc, argv, &g) == 0)
 		return (0);
 	if (init(&g) == -1)
 		return (0);

@@ -31,8 +31,6 @@ int		ft_init(t_gen *g, char *pass)
 		y++;
 	}
 	g->larg_y = ft_strlen_tab(tab);
-	if (g->larg_y <= 21)
-		return (-1);
 	close(fd);
 	free(test);
 	return (0);

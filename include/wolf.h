@@ -70,20 +70,28 @@ typedef	struct		s_gen
 	int				drawend;
 	double			sprint;
 	int				hidd_menu;
-
-	int menu_mod;
-	int pos_curseur;
-	char *path_save;
-	double old_posx;
-	double old_posy;
+	int				map_affiche;
+	int				menu_mod;
+	int				pos_curseur;
+	char			*path_save;
+	double			old_posx;
+	double			old_posy;
+	int				x_map_1;
+	int				y_map_1;
+	int				x_map;
+	int				y_map;
+	int				limit_x;
+	int				limit_y;
+	int				save_y;
 }					t_gen;
 
 int					ft_pars(t_gen *g, char *pass);
-void	load(t_gen *g);
-int		key_menu1(int kc, t_gen *g);
-void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan);
-void	key_pressed_color(int kc, t_gen *g);
-void	affiche(t_gen *g);
+void				load(t_gen *g);
+int					key_menu1(int kc, t_gen *g);
+void				key_pressed_deplace(int kc, t_gen *g,
+	double olddir, double oldplan);
+void				key_pressed_color(int kc, t_gen *g);
+void				affiche(t_gen *g);
 void				ft_free_tab(char **tab);
 int					ft_strlen_tab(char **tab);
 int					ft_strlen_s(char *str);

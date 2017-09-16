@@ -52,7 +52,6 @@ void	calcule2(t_gen *g)
 			g->mapy += g->stepy;
 			g->side = 1;
 		}
-	
 		if (g->map[g->mapx][g->mapy] > 0)
 			g->hit = 1;
 	}

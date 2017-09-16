@@ -60,6 +60,13 @@ void	key_pressed_color(int kc, t_gen *g)
 		g->blue2++;
 	if (kc == 88)
 		g->blue2--;
+	if (kc == 46 && g->map_affiche == 0)
+		g->map_affiche = 1;
+	else if (kc == 46 && g->map_affiche == 1)
+		g->map_affiche = 0;
+	if (g->posx > 18 && g->posx < 19 && g->posy > 5.5 &&
+		g->posy < 6 && g->larg_x > 27)
+		g->posx += 8;
 }
 
 int		key_pressed(int kc, t_gen *g)
@@ -85,8 +92,6 @@ int		key_pressed(int kc, t_gen *g)
 		g->sprint = 0.5;
 	else if (kc == 257 && g->sprint == 0.5)
 		g->sprint = 0.1;
-	if (g->posx > 18 && g->posx < 19 && g->posy > 5.5 && g->posy < 6 && g->larg_x > 27)
-		g->posx += 8;
 	ft_start_algo(g);
 	return (0);
 }

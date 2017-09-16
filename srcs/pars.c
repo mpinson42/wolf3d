@@ -106,7 +106,7 @@ int	ft_pars(t_gen *g, char *pass)
 		lang = ft_strlen_s(test);
 		free(test);
 	}
-	if (g->larg_x <= 21 || go_malloc2(g, lang) == -1)
+	if (go_malloc2(g, lang) == -1)
 		return (-1);
 	close(fd);
 	if (ft_init(g, pass) == -1)

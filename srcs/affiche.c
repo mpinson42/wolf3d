@@ -39,8 +39,92 @@ void	draw_flech(int x, int y, t_gen *g)
 	}
 }
 
+int		ft_algo_choise_color1_2(t_gen *g, int x, int y)
+{
+	if (g->map[x][y] == 1)
+	{
+		g->red = 255;
+		g->green = 0;
+		g->blue = 0;
+		return (1);
+	}
+	else if (g->map[x][y] == 2)
+	{
+		g->red = 0;
+		g->green = 255;
+		g->blue = 0;
+		return (1);
+	}
+	else if (g->map[x][y] == 3)
+	{
+		g->red = 0;
+		g->green = 0;
+		g->blue = 255;
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_algo_choise_color2_2(t_gen *g, int x, int y)
+{
+	if (g->map[x][y] == 4)
+	{
+		g->red = 255;
+		g->green = 255;
+		g->blue = 255;
+	}
+	else if (g->map[x][y] == 5)
+	{
+		g->red = 255 / 2;
+		g->green = 255 / 2;
+		g->blue = 255 / 2;
+	}
+	else if (g->posx > x && g->posx - 1 < x && g->posy > y && g->posy - 1 < y)
+	{
+		g->red = 5;
+		g->green = 100;
+		g->blue = 55;
+	}
+	else
+	{
+		g->red = 0;
+		g->green = 0;
+		g->blue = 0;
+	}
+}
+
+void	ft_map(t_gen *g)
+{
+	g->y_map_1 = 5;
+	g->x_map = -1;
+	while (++g->x_map < g->larg_x)
+	{
+		g->y_map = -1;
+		g->x_map_1 = W - g->larg_y * 10 - 5;
+		while (++g->y_map < g->larg_y)
+		{
+			if (ft_algo_choise_color1_2(g, g->x_map, g->y_map) == 0)
+				ft_algo_choise_color2_2(g, g->x_map, g->y_map);
+			g->limit_x = g->x_map_1 + 10;
+			g->limit_y = g->y_map_1 + 10;
+			g->save_y = g->y_map_1;
+			while (g->x_map_1 < g->limit_x)
+			{
+				g->y_map_1 = g->save_y - 1;
+				while (++g->y_map_1 < g->limit_y)
+					ft_putpixel_in_img(g->x_map_1, g->y_map_1, g, 42);
+				g->x_map_1++;
+			}
+			g->y_map_1 = g->save_y;
+		}
+		g->y_map_1 += 10;
+	}
+}
+
 void	affiche(t_gen *g)
 {
+	if (g->map_affiche == 1)
+		ft_map(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	if (g->menu_mod)
 	{

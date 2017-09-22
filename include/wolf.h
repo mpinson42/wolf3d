@@ -24,6 +24,7 @@
 typedef	struct		s_gen
 {
 	int				**map;
+	int 			mini_map[5][5];
 	int				larg_x;
 	int				larg_y;
 	void			*win;

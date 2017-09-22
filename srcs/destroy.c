@@ -67,14 +67,14 @@ int ft_clic(int button, int x,int y, t_gen *g)
 			g->map[g->mapx][g->mapy] = 0;
 		if(y >= g->drawstart && y <= g->drawend && button == 2)
 		{
-			if(g->side == 1 && g->mapy != g->larg_x - 1 && g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy)
+			if(g->side == 1 && g->mapy != g->larg_x - 1 && g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy && (int)g->posy != g->mapy + 1 && (int)g->posy != g->mapy + 1)
 				g->map[g->mapx][g->mapy + 1] = 1;
-			if(g->side == 1 && g->mapy != 0 && g->map[g->mapx][g->mapy - 1] == 0 && g->posy < g->mapy)
+			if(g->side == 1 && g->mapy != 0 && g->map[g->mapx][g->mapy - 1] == 0 && g->posy < g->mapy && (int)g->posy != g->mapy - 1 && (int)g->posy != g->mapy - 1)
 				g->map[g->mapx][g->mapy - 1] = 1;
 
-			if(g->side == 0 && g->mapx != g->larg_x - 1 && g->map[g->mapx + 1][g->mapy] == 0 && g->posx > g->mapx)
+			if(g->side == 0 && g->mapx != g->larg_x - 1 && g->map[g->mapx + 1][g->mapy] == 0 && g->posx > g->mapx && (int)g->posx != g->mapx + 1 && (int)g->posx != g->mapx + 1)
 				g->map[g->mapx + 1][g->mapy] = 1;
-			if(g->side == 0 && g->mapx != 0 && g->map[g->mapx - 1][g->mapy] == 0 && g->posx < g->mapx)
+			if(g->side == 0 && g->mapx != 0 && g->map[g->mapx - 1][g->mapy] == 0 && g->posx < g->mapx && (int)g->posx != g->mapx - 1 && (int)g->posx != g->mapx - 1)
 				g->map[g->mapx - 1][g->mapy] = 1;
 		}
 	ft_start_algo(g);

@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
+#include <stdio.h>
 
 # define W (2560 / 2)
 # define H (1440 / 2)
@@ -109,5 +110,6 @@ void				ft_menu(t_gen *g);
 void				init_algo(t_gen *g, int x);
 int					ft_init(t_gen *g, char *pass);
 int					go_malloc1(char **tab, int y, t_gen *g);
+int ft_clic(int button, int x,int y, t_gen *g);
 
 #endif

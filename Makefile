@@ -1,10 +1,10 @@
 NAME = wolf3d
 
-SRC = srcs/main.c srcs/pars.c srcs/lib.c srcs/event.c srcs/algo.c srcs/init.c srcs/menu.c srcs/affiche.c
+SRC = srcs/main.c srcs/pars.c srcs/lib.c srcs/event.c srcs/algo.c srcs/init.c srcs/menu.c srcs/affiche.c srcs/destroy.c
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC2 = main.o pars.o lib.o event.o algo.o init.o menu.o affiche.o
+SRC2 = main.o pars.o lib.o event.o algo.o init.o menu.o affiche.o destroy.o
 
 all: $(NAME)
 

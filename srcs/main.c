@@ -101,5 +101,6 @@ int		main(int argc, char **argv)
 	ft_start_algo(&g);
 	mlx_hook(g.win, 2, 1L << 0, &key_pressed, &g);
 	mlx_hook(g.win, 17, (1L << 17), &red_cross, &g);
+	mlx_mouse_hook(g.win, &ft_clic, &g);
 	mlx_loop(g.mlx);
 }

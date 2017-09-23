@@ -15,6 +15,7 @@
 int		red_cross(t_gen *g)
 {
 	(void)g;
+	system("killall afplay");
 	exit(0);
 	return (0);
 }

@@ -98,6 +98,7 @@ int		main(int argc, char **argv)
 	ft_init_str(&g);
 	if (argc == 3)
 		load(&g);
+	system("afplay musique/doom.mp3 &");
 	ft_start_algo(&g);
 	mlx_hook(g.win, 2, 1L << 0, &key_pressed, &g);
 	mlx_hook(g.win, 17, (1L << 17), &red_cross, &g);

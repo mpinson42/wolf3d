@@ -60,6 +60,7 @@ void	ft_chr42(t_gen *g)
 		}
 		x++;
 	}
+	system("killall afplay");
 	exit(0);
 }
 

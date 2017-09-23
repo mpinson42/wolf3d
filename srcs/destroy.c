@@ -56,6 +56,7 @@ int ft_clic(int button, int x,int y, t_gen *g)
 		init_algo(g, x);
 		calcule_2(g);
 		calcule2_2(g);
+		printf("%d\n", button);
 		g->lineh = H / g->perpwalldist;
 		g->drawstart = -g->lineh / 2 + H / 2;
 		if (g->drawstart < 0)
@@ -64,7 +65,10 @@ int ft_clic(int button, int x,int y, t_gen *g)
 		if (g->drawend > H)
 			g->drawend = H - 1;
 		if(y >= g->drawstart && y <= g->drawend && g->mapx !=0 && g->mapy !=0 && g->mapx != g->larg_x - 1 && g->mapy != g->larg_y - 1 && button == 1)
+		{
+			system("afplay musique/pistolet.mp3 &");
 			g->map[g->mapx][g->mapy] = 0;
+		}
 		if(y >= g->drawstart && y <= g->drawend && button == 2)
 		{
 			if(g->side == 1 && g->mapy != g->larg_x - 1 && g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy && (int)g->posy != g->mapy + 1 && (int)g->posy != g->mapy + 1)

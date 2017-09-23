@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   destroy.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpinson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/23 18:53:17 by mpinson           #+#    #+#             */
+/*   Updated: 2017/09/23 18:53:19 by mpinson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf.h"
 
 void	calcule_2(t_gen *g)
@@ -51,36 +63,48 @@ void	calcule2_2(t_gen *g)
 				(1 - g->stepy) / 2) / g->raydiry;
 }
 
-int ft_clic(int button, int x,int y, t_gen *g)
+void	ft_block(t_gen *g, int y, int button)
 {
-		init_algo(g, x);
-		calcule_2(g);
-		calcule2_2(g);
-		printf("%d\n", button);
-		g->lineh = H / g->perpwalldist;
-		g->drawstart = -g->lineh / 2 + H / 2;
-		if (g->drawstart < 0)
-			g->drawstart = 0;
-		g->drawend = g->lineh / 2 + H / 2;
-		if (g->drawend > H)
-			g->drawend = H - 1;
-		if(y >= g->drawstart && y <= g->drawend && g->mapx !=0 && g->mapy !=0 && g->mapx != g->larg_x - 1 && g->mapy != g->larg_y - 1 && button == 1)
-		{
-			system("afplay musique/pistolet.mp3 &");
-			g->map[g->mapx][g->mapy] = 0;
-		}
-		if(y >= g->drawstart && y <= g->drawend && button == 2)
-		{
-			if(g->side == 1 && g->mapy != g->larg_x - 1 && g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy && (int)g->posy != g->mapy + 1 && (int)g->posy != g->mapy + 1)
-				g->map[g->mapx][g->mapy + 1] = 1;
-			if(g->side == 1 && g->mapy != 0 && g->map[g->mapx][g->mapy - 1] == 0 && g->posy < g->mapy && (int)g->posy != g->mapy - 1 && (int)g->posy != g->mapy - 1)
-				g->map[g->mapx][g->mapy - 1] = 1;
+	if (y >= g->drawstart && y <= g->drawend && button == 2)
+	{
+		if (g->side == 1 && g->mapy != g->larg_x - 1 &&
+			g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy &&
+			(int)g->posy != g->mapy + 1 && (int)g->posy != g->mapy + 1)
+			g->map[g->mapx][g->mapy + 1] = 1;
+		if (g->side == 1 && g->mapy != 0 && g->map[g->mapx][g->mapy - 1] == 0
+			&& g->posy < g->mapy && (int)g->posy != g->mapy - 1 && (int)g->posy
+			!= g->mapy - 1)
+			g->map[g->mapx][g->mapy - 1] = 1;
+		if (g->side == 0 && g->mapx != g->larg_x - 1 &&
+			g->map[g->mapx + 1][g->mapy] == 0 && g->posx > g->mapx &&
+			(int)g->posx != g->mapx + 1 && (int)g->posx != g->mapx + 1)
+			g->map[g->mapx + 1][g->mapy] = 1;
+		if (g->side == 0 && g->mapx != 0 && g->map[g->mapx - 1][g->mapy] == 0 &&
+			g->posx < g->mapx && (int)g->posx != g->mapx - 1 &&
+			(int)g->posx != g->mapx - 1)
+			g->map[g->mapx - 1][g->mapy] = 1;
+	}
+}
 
-			if(g->side == 0 && g->mapx != g->larg_x - 1 && g->map[g->mapx + 1][g->mapy] == 0 && g->posx > g->mapx && (int)g->posx != g->mapx + 1 && (int)g->posx != g->mapx + 1)
-				g->map[g->mapx + 1][g->mapy] = 1;
-			if(g->side == 0 && g->mapx != 0 && g->map[g->mapx - 1][g->mapy] == 0 && g->posx < g->mapx && (int)g->posx != g->mapx - 1 && (int)g->posx != g->mapx - 1)
-				g->map[g->mapx - 1][g->mapy] = 1;
-		}
+int		ft_clic(int button, int x, int y, t_gen *g)
+{
+	init_algo(g, x);
+	calcule_2(g);
+	calcule2_2(g);
+	g->lineh = H / g->perpwalldist;
+	g->drawstart = -g->lineh / 2 + H / 2;
+	if (g->drawstart < 0)
+		g->drawstart = 0;
+	g->drawend = g->lineh / 2 + H / 2;
+	if (g->drawend > H)
+		g->drawend = H - 1;
+	if (y >= g->drawstart && y <= g->drawend && g->mapx != 0 && g->mapy != 0
+		&& g->mapx != g->larg_x - 1 && g->mapy != g->larg_y - 1 && button == 1)
+	{
+		system("afplay musique/pistolet.mp3 &");
+		g->map[g->mapx][g->mapy] = 0;
+	}
+	ft_block(g, y, button);
 	ft_start_algo(g);
-	return(0);
+	return (0);
 }

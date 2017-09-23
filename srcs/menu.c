@@ -63,11 +63,8 @@ int		key_menu2(int kc, t_gen *g)
 	}
 	else if (kc == 36 && g->menu_mod == 1)
 	{
-		if(g->pos_curseur == 4)
-		{
-			system("killall afplay");
-			exit(0);
-		}
+		g->pos_curseur == 4 ? system("killall afplay") : 0;
+		g->pos_curseur == 4 ? exit(0) : 0;
 		g->pos_curseur == 2 ? ft_init_str(g) : 0;
 		g->pos_curseur == 1 ? save(g) : 0;
 		g->pos_curseur == 3 ? load(g) : 0;
@@ -86,11 +83,8 @@ int		key_menu2(int kc, t_gen *g)
 
 int		key_menu1(int kc, t_gen *g)
 {
-	if(kc == 53)
-	{
-		system("killall afplay");
-		exit(0);
-	}
+	kc == 53 ? system("killall afplay") : 0;
+	kc == 53 ? exit(0) : 0;
 	kc == 53 && g->menu_mod == 1 ? g->menu_mod = 0 : 0;
 	if (kc == 126 && g->menu_mod == 1)
 	{

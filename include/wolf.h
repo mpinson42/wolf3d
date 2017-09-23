@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
-#include <stdio.h>
 
 # define W (2560 / 2)
 # define H (1440 / 2)

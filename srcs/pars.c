@@ -51,9 +51,9 @@ int	go_malloc1(char **tab, int y, t_gen *g)
 	while (i < ft_strlen_tab(tab))
 	{
 		g->map[y][i] = ft_atoi(tab[i]);
-		free(tab[i]);
 		i++;
 	}
+	ft_free_tab(tab);
 	return (0);
 }
 

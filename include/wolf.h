@@ -23,7 +23,7 @@
 typedef	struct		s_gen
 {
 	int				**map;
-	int 			mini_map[5][5];
+	int				mini_map[5][5];
 	int				larg_x;
 	int				larg_y;
 	void			*win;
@@ -110,6 +110,6 @@ void				ft_menu(t_gen *g);
 void				init_algo(t_gen *g, int x);
 int					ft_init(t_gen *g, char *pass);
 int					go_malloc1(char **tab, int y, t_gen *g);
-int ft_clic(int button, int x,int y, t_gen *g);
+int					ft_clic(int button, int x, int y, t_gen *g);
 
 #endif

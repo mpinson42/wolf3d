@@ -22,7 +22,7 @@ int		ft_init(t_gen *g, char *pass)
 	y = 0;
 	if ((fd = open(pass, O_RDONLY)) == -1)
 		return (-1);
-	while (get_next_line(fd, &test) > 0)
+	while (get_next_line3(fd, &test) > 0)
 	{
 		tab = ft_strsplit(test, ' ');
 		if (-1 == (go_malloc1(tab, y, g)))

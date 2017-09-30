@@ -32,12 +32,12 @@ void	load(t_gen *g)
 	int		fd;
 
 	fd = open(g->path_save, O_RDONLY);
-	if (fd == -1 || get_next_line(fd, &str) == 0)
+	if (fd == -1 || get_next_line2(fd, &str) == 0)
 		return ;
 	if (ft_strlen(str) > 11 || ft_atol(str) >= g->larg_x || ft_atol(str) < 0)
 		return ;
 	x = ft_atoi(str);
-	if (get_next_line(fd, &str) == 0)
+	if (get_next_line2(fd, &str) == 0)
 		return ;
 	if (ft_strlen(str) > 11 || ft_atol(str) >= g->larg_y || ft_atol(str) < 0)
 		return ;

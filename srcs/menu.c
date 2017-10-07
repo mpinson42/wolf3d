@@ -24,24 +24,8 @@ void	save(t_gen *g)
 	close(fd);
 }
 
-void	load(t_gen *g)
+void	recadre(t_gen *g, int x, int y)
 {
-	char	*str;
-	int		x;
-	int		y;
-	int		fd;
-
-	fd = open(g->path_save, O_RDONLY);
-	if (fd == -1 || get_next_line2(fd, &str) == 0)
-		return ;
-	if (ft_strlen(str) > 11 || ft_atol(str) >= g->larg_x || ft_atol(str) < 0)
-		return ;
-	x = ft_atoi(str);
-	if (get_next_line2(fd, &str) == 0)
-		return ;
-	if (ft_strlen(str) > 11 || ft_atol(str) >= g->larg_y || ft_atol(str) < 0)
-		return ;
-	y = ft_atoi(str);
 	if (g->larg_x / 2 > x)
 		g->posx = x + 0.5;
 	else
@@ -50,6 +34,29 @@ void	load(t_gen *g)
 		g->posy = y + 0.5;
 	else
 		g->posy = y - 0.5;
+}
+
+void	load(t_gen *g)
+{
+	char	str[10];
+	char	**t;
+	int		x;
+	int		y;
+	int		fd;
+
+	if ((fd = open(g->path_save, O_RDONLY)) == -1)
+		return ;
+	read(fd, str, 10);
+	tab = ft_strsplit(str, '\n');
+	if (ft_strlen_tab(t) != 2)
+		return ;
+	if (ft_strlen(t[0]) > 11 || ft_atol(t[0]) >= g->larg_x || ft_atol(t[0]) < 0)
+		return ;
+	x = ft_atoi(tab[0]);
+	if (ft_strlen(t[1]) > 11 || ft_atol(t[1]) >= g->larg_y || ft_atol(t[1]) < 0)
+		return ;
+	y = ft_atoi(tab[1]);
+	recadre(g, x, y);
 	close(fd);
 }
 

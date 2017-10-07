@@ -47,15 +47,15 @@ void	load(t_gen *g)
 	if ((fd = open(g->path_save, O_RDONLY)) == -1)
 		return ;
 	read(fd, str, 10);
-	tab = ft_strsplit(str, '\n');
+	t = ft_strsplit(str, '\n');
 	if (ft_strlen_tab(t) != 2)
 		return ;
 	if (ft_strlen(t[0]) > 11 || ft_atol(t[0]) >= g->larg_x || ft_atol(t[0]) < 0)
 		return ;
-	x = ft_atoi(tab[0]);
+	x = ft_atoi(t[0]);
 	if (ft_strlen(t[1]) > 11 || ft_atol(t[1]) >= g->larg_y || ft_atol(t[1]) < 0)
 		return ;
-	y = ft_atoi(tab[1]);
+	y = ft_atoi(t[1]);
 	recadre(g, x, y);
 	close(fd);
 }

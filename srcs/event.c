@@ -75,6 +75,8 @@ int		key_pressed(int kc, t_gen *g)
 	double olddir;
 	double oldplan;
 
+	if (kc == 19)
+		bmp_write(g);
 	if (key_menu1(kc, g) == 0)
 		return (0);
 	if (g->posx > 24 && g->posx < 25 && g->posy > 22 && g->posy < 23)

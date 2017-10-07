@@ -19,6 +19,8 @@
 
 # define W (2560 / 2)
 # define H (1440 / 2)
+# define IMG_WIDTH (2560 / 2)
+# define IMG_HEIGHT (1440 / 2)
 
 typedef	struct		s_gen
 {
@@ -86,6 +88,7 @@ typedef	struct		s_gen
 	int				save_y;
 }					t_gen;
 
+void				bmp_write(t_gen *g);
 int					ft_pars(t_gen *g, char *pass);
 void				load(t_gen *g);
 int					key_menu1(int kc, t_gen *g);

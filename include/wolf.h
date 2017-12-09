@@ -24,6 +24,20 @@
 
 typedef	struct		s_gen
 {
+	int				texx;
+	char			*p_img;
+	int				d;
+	int				texy;
+	int				texture;
+	int				nb_block;
+	void			*eagle;
+	char			*ptr_eagle;
+	void			*redbrick;
+	char			*ptr_redbrick;
+	void			*wood;
+	char			*ptr_wood;
+	void			*stone;
+	char			*ptr_stone;
 	int				**map;
 	int				mini_map[5][5];
 	int				larg_x;
@@ -114,5 +128,8 @@ void				init_algo(t_gen *g, int x);
 int					ft_init(t_gen *g, char *pass);
 int					go_malloc1(char **tab, int y, t_gen *g);
 int					ft_clic(int button, int x, int y, t_gen *g);
+void				ft_draw(int x, int start, int end, t_gen *g);
+int					ft_load_img(t_gen *g);
+int					ft_load_img2(t_gen *g);
 
 #endif

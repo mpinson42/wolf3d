@@ -68,6 +68,10 @@ void	key_pressed_color(int kc, t_gen *g)
 	if (g->posx > 18 && g->posx < 19 && g->posy > 5.5 &&
 		g->posy < 6 && g->larg_x > 27)
 		g->posx += 8;
+	if (kc == 17 && g->texture == 1)
+		g->texture = 0;
+	else if (kc == 17 && g->texture == 0)
+		g->texture = 1;
 }
 
 int		key_pressed(int kc, t_gen *g)

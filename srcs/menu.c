@@ -58,6 +58,7 @@ void	load(t_gen *g)
 	y = ft_atoi(t[1]);
 	recadre(g, x, y);
 	close(fd);
+	ft_free_tab(t);
 }
 
 int		key_menu2(int kc, t_gen *g)

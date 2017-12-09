@@ -6,7 +6,7 @@
 /*   By: mpinson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 18:04:07 by mpinson           #+#    #+#             */
-/*   Updated: 2017/09/09 18:26:08 by mpinson          ###   ########.fr       */
+/*   Updated: 2017/12/09 17:26:25 by mpinson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,27 @@ void	ft_menu(t_gen *g)
 	mlx_string_put(g->mlx, g->win, 0, 75, 0x00FFFFFF, "entre menu");
 	mlx_string_put(g->mlx, g->win, 0, 90, 0x00FFFFFF, "! tuto");
 	mlx_string_put(g->mlx, g->win, 0, 105, 0x00FFFFFF, "m map");
+	mlx_string_put(g->mlx, g->win, 0, 120, 0x00FFFFFF, "t texture");
+	mlx_string_put(g->mlx, g->win, 0, 135, 0x00FFFFFF, "@ screen");
 }
 
 void	ft_verline(int x, int start, int end, t_gen *g)
 {
-	while (start < end)
-	{
-		ft_putpixel_in_img(x, start, g, 42);
-		start++;
-	}
+	double wallx;
+
+	g->texture == 1 && g->nb_block == 3 ? g->p_img = g->ptr_eagle : 0;
+	g->texture == 1 && g->nb_block == 1 ? g->p_img = g->ptr_redbrick : 0;
+	g->texture == 1 && g->nb_block == 4 ? g->p_img = g->ptr_wood : 0;
+	g->texture == 1 && g->nb_block == 2 ? g->p_img = g->ptr_stone : 0;
+	if (g->side == 0)
+		wallx = g->rayposy + g->perpwalldist * g->raydiry;
+	else
+		wallx = g->rayposx + g->perpwalldist * g->raydirx;
+	wallx -= floor((wallx));
+	g->texx = (int)(wallx * (double)64);
+	g->side == 0 && g->raydirx > 0 ? g->texx = 64 - g->texx - 1 : 0;
+	g->side == 1 && g->raydiry < 0 ? g->texx = 64 - g->texx - 1 : 0;
+	ft_draw(x, start, end, g);
 }
 
 void	ft_setimage(t_gen *g)
@@ -78,8 +90,8 @@ int		main2(int argc, char **argv, t_gen *g)
 	}
 	g->path_save = ft_strdup("./save/save.sa");
 	if ((argc == 3) && (argv[2][ft_strlen(argv[2]) - 1] == 'a' &&
-		argv[2][ft_strlen(argv[2]) - 2] == 's' &&
-		argv[2][ft_strlen(argv[2]) - 3] == '.'))
+				argv[2][ft_strlen(argv[2]) - 2] == 's' &&
+				argv[2][ft_strlen(argv[2]) - 3] == '.'))
 	{
 		g->path_save = ft_strdup(argv[2]);
 	}

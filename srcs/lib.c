@@ -82,5 +82,7 @@ int		init(t_gen *g)
 		return (-1);
 	if (!(g->win = mlx_new_window(g->mlx, W, H, "wolf3D")))
 		return (-1);
+	if (ft_load_img(g) == -1 || ft_load_img2(g) == -1)
+		return (-1);
 	return (0);
 }

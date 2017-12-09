@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpinson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/09 18:33:59 by mpinson           #+#    #+#             */
-/*   Updated: 2017/09/09 18:34:01 by mpinson          ###   ########.fr       */
+/*   Created: 2017/11/25 14:14:39 by mpinson           #+#    #+#             */
+/*   Updated: 2017/11/25 14:14:47 by mpinson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	calcule2(t_gen *g)
 
 int		ft_algo_choise_color1(t_gen *g)
 {
+	g->nb_block = g->map[g->mapx][g->mapy];
 	if (g->map[g->mapx][g->mapy] == 1)
 	{
 		g->red = 255;
@@ -135,7 +136,7 @@ void	ft_start_algo(t_gen *g)
 		g->drawend = g->lineh / 2 + H / 2;
 		if (g->drawend > H)
 			g->drawend = H - 1;
-		ft_verline(x, g->drawstart, g->drawend, g);
+		ft_verline(x, g->drawstart - 1, g->drawend, g);
 		x++;
 	}
 	affiche(g);

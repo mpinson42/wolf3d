@@ -46,7 +46,7 @@ void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan)
 		g->plany = oldplan * sin(-0.1) + g->plany * cos(-0.1);
 	}
 }
-
+#include <stdio.h>
 void	key_pressed_color(int kc, t_gen *g)
 {
 	if (kc == 89)
@@ -79,6 +79,10 @@ int		key_pressed(int kc, t_gen *g)
 	double olddir;
 	double oldplan;
 
+	if (kc == 49 && g->block_mouse == 1 )
+		g->block_mouse = 0;
+	else if (kc == 49 && g->block_mouse == 0)
+		g->block_mouse = 1;
 	if (kc == 19)
 		bmp_write(g);
 	if (key_menu1(kc, g) == 0)
@@ -100,6 +104,7 @@ int		key_pressed(int kc, t_gen *g)
 	else if (kc == 257 && g->sprint == 0.5)
 		g->sprint = 0.1;
 	ft_start_algo(g);
+    
 	return (0);
 }
 
@@ -124,4 +129,41 @@ void	ft_putpixel_in_img(int x, int y, t_gen *g, unsigned int color)
 		g->img_ptr[(x * 4) + (y * W * 4) + 2] = g->red + g->red2;
 		g->img_ptr[(x * 4) + (y * W * 4) + 3] = 0;
 	}
+}
+
+int		ft_mouse(int x, int y, t_gen *g) {
+	double olddir;
+	double oldplan;
+
+	static int x_s = 0;
+	static int y_s = 0;
+
+	if (g->block_mouse)
+		return (0);
+	if(x < x_s)
+	{
+		olddir = g->dirx;
+		g->dirx = g->dirx * cos(0.07) - g->diry * sin(0.07);
+		g->diry = olddir * sin(0.07) + g->diry * cos(0.07);
+		oldplan = g->planx;
+		g->planx = g->planx * cos(0.07) - g->plany * sin(0.07);
+		g->plany = oldplan * sin(0.07) + g->plany * cos(0.07);	
+	}
+	if(x > x_s)
+	{
+		olddir = g->dirx;
+		g->dirx = g->dirx * cos(-0.07) - g->diry * sin(-0.07);
+		g->diry = olddir * sin(-0.07) + g->diry * cos(-0.07);
+		oldplan = g->planx;
+		g->planx = g->planx * cos(-0.07) - g->plany * sin(-0.07);
+		g->plany = oldplan * sin(-0.07) + g->plany * cos(-0.07);	
+	}
+	if (y > y_s && g->hauteur > -200)
+			g->hauteur -= 20;
+	if (y < y_s && g->hauteur < 200)
+			g->hauteur +=20;
+	x_s = x;
+	y_s = y;
+	ft_start_algo(g);
+	return(0);
 }

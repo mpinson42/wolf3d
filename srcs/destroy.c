@@ -63,9 +63,9 @@ void	calcule2_2(t_gen *g)
 				(1 - g->stepy) / 2) / g->raydiry;
 }
 
-void	ft_block(t_gen *g, int y, int button)
+void	ft_block(t_gen *g, int button)
 {
-	if (y >= g->drawstart && y <= g->drawend && button == 2)
+	if (button == 2)
 	{
 		if (g->side == 1 && g->mapy != g->larg_x - 1 &&
 			g->map[g->mapx][g->mapy + 1] == 0 && g->posy > g->mapy &&
@@ -88,6 +88,7 @@ void	ft_block(t_gen *g, int y, int button)
 
 int		ft_clic(int button, int x, int y, t_gen *g)
 {
+	(void)y;
 	init_algo(g, x);
 	calcule_2(g);
 	calcule2_2(g);
@@ -98,13 +99,13 @@ int		ft_clic(int button, int x, int y, t_gen *g)
 	g->drawend = g->lineh / 2 + H / 2;
 	if (g->drawend > H)
 		g->drawend = H - 1;
-	if (y >= g->drawstart && y <= g->drawend && g->mapx != 0 && g->mapy != 0
+	if (g->mapx != 0 && g->mapy != 0
 		&& g->mapx != g->larg_x - 1 && g->mapy != g->larg_y - 1 && button == 1)
 	{
 		system("afplay musique/pistolet.mp3 &");
 		g->map[g->mapx][g->mapy] = 0;
 	}
-	ft_block(g, y, button);
+	ft_block(g, button);
 	ft_start_algo(g);
 	return (0);
 }

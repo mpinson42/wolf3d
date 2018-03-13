@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
+# include <pthread.h>
 
 # define W (2560 / 2)
 # define H (1440 / 2)
@@ -24,6 +25,9 @@
 
 typedef	struct		s_gen
 {
+	int 	block_mouse;
+	pthread_t thread1;
+	int 			hauteur;
 	int				texx;
 	char			*p_img;
 	int				d;
@@ -119,8 +123,8 @@ int					red_cross(t_gen *g);
 int					key_pressed(int kc, t_gen *g);
 void				ft_putpixel_in_img(int x,
 	int y, t_gen *g, unsigned int color);
-void				ft_start_algo(t_gen *g);
-void				ft_setimage(t_gen *g);
+void				*ft_start_algo(void *g);
+void	*ft_setimage(void *p);
 void				ft_init_str(t_gen *g);
 void				ft_verline(int x, int start, int end, t_gen *g);
 void				ft_menu(t_gen *g);
@@ -131,5 +135,6 @@ int					ft_clic(int button, int x, int y, t_gen *g);
 void				ft_draw(int x, int start, int end, t_gen *g);
 int					ft_load_img(t_gen *g);
 int					ft_load_img2(t_gen *g);
+int					ft_mouse(int x, int y, t_gen *g);
 
 #endif

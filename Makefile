@@ -17,7 +17,7 @@ $(NAME): $(SRC)
 	@make -C ./minilibx_macos all
 	@cp ./minilibx_macos/libmlx.a ./lib
 	@cp ./libft/libft.a ./lib
-	gcc  $(FLAGS)  -I ./include/  -L./lib  -lft -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(SRC)
+	gcc  $(FLAGS) -lpthread  -I ./include/  -L./lib  -lft -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(SRC)
 	afplay musique/enclume.mp3 &
 
 

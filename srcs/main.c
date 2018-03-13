@@ -45,10 +45,11 @@ void	ft_verline(int x, int start, int end, t_gen *g)
 	ft_draw(x, start, end, g);
 }
 
-void	ft_setimage(t_gen *g)
+void	*ft_setimage(void *p)
 {
 	int x;
 	int y;
+	t_gen *g = p;
 
 	x = -1;
 	while (++x < W)
@@ -56,7 +57,7 @@ void	ft_setimage(t_gen *g)
 		y = -1;
 		while (++y < H)
 		{
-			if (y < H / 2)
+			if (y < H / 2 + g->hauteur)
 			{
 				g->red = 96;
 				g->green = 96;
@@ -71,6 +72,7 @@ void	ft_setimage(t_gen *g)
 			ft_putpixel_in_img(x, y, g, 42);
 		}
 	}
+	return (NULL);
 }
 
 int		main2(int argc, char **argv, t_gen *g)
@@ -102,6 +104,8 @@ int		main(int argc, char **argv)
 {
 	t_gen g;
 
+	g.block_mouse = 0;
+	g.hauteur = 0;
 	ft_bzero(&g, sizeof(g));
 	if (main2(argc, argv, &g) == 0)
 		return (0);
@@ -115,5 +119,6 @@ int		main(int argc, char **argv)
 	mlx_hook(g.win, 2, 1L << 0, &key_pressed, &g);
 	mlx_hook(g.win, 17, (1L << 17), &red_cross, &g);
 	mlx_mouse_hook(g.win, &ft_clic, &g);
+	mlx_hook(g.win, 6, (1L << 7), &ft_mouse, &g);
 	mlx_loop(g.mlx);
 }

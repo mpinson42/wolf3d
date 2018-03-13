@@ -116,12 +116,22 @@ void	ft_algo_choise_color2(t_gen *g)
 	}
 }
 
-void	ft_start_algo(t_gen *g)
+void	*ft_start_algo(void *p)
 {
 	int x;
 
+	t_gen *g = p;
 	x = 0;
-	ft_setimage(g);
+	//ft_setimage(g);
+
+	if (pthread_create(&g->thread1, NULL, ft_setimage, g)) {
+		exit(0);
+    }
+    if (pthread_join(g->thread1, NULL)) {
+		exit(0);
+    }
+
+
 	while (x < W)
 	{
 		init_algo(g, x);
@@ -130,14 +140,16 @@ void	ft_start_algo(t_gen *g)
 		if (ft_algo_choise_color1(g) == 0)
 			ft_algo_choise_color2(g);
 		g->lineh = H / g->perpwalldist;
-		g->drawstart = -g->lineh / 2 + H / 2;
+		g->drawstart = -g->lineh / 2 + H / 2 + g->hauteur;
 		if (g->drawstart < 0)
 			g->drawstart = 0;
-		g->drawend = g->lineh / 2 + H / 2;
+		g->drawend = g->lineh / 2 + H / 2 + g->hauteur;
 		if (g->drawend > H)
 			g->drawend = H - 1;
 		ft_verline(x, g->drawstart - 1, g->drawend, g);
 		x++;
 	}
 	affiche(g);
+	p = g;
+	return (NULL);
 }

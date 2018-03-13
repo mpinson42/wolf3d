@@ -60,7 +60,7 @@ void	ft_draw(int x, int start, int end, t_gen *g)
 		if (g->texture == 1 && (g->nb_block == 1 ||
 			g->nb_block == 2 || g->nb_block == 4 || g->nb_block == 3))
 		{
-			g->d = start * 256 - H * 128 + g->lineh * 128;
+			g->d = (start - g->hauteur) * 256 - H * 128 + g->lineh * 128;
 			g->texy = ((g->d * 64) / g->lineh) / 256;
 			g->blue = g->p_img[(64 * g->texy * 4) + (g->texx * 4)];
 			g->green = g->p_img[(64 * g->texy * 4) + (g->texx * 4) + 1];

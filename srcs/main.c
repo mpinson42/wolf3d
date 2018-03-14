@@ -45,11 +45,10 @@ void	ft_verline(int x, int start, int end, t_gen *g)
 	ft_draw(x, start, end, g);
 }
 
-void	*ft_setimage(void *p)
+void	ft_setimage(t_gen *g)
 {
 	int x;
 	int y;
-	t_gen *g = p;
 
 	x = -1;
 	while (++x < W)
@@ -72,7 +71,6 @@ void	*ft_setimage(void *p)
 			ft_putpixel_in_img(x, y, g, 42);
 		}
 	}
-	return (NULL);
 }
 
 int		main2(int argc, char **argv, t_gen *g)

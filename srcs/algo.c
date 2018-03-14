@@ -116,22 +116,12 @@ void	ft_algo_choise_color2(t_gen *g)
 	}
 }
 
-void	*ft_start_algo(void *p)
+void	ft_start_algo(t_gen *g)
 {
 	int x;
 
-	t_gen *g = p;
 	x = 0;
-	//ft_setimage(g);
-
-	if (pthread_create(&g->thread1, NULL, ft_setimage, g)) {
-		exit(0);
-    }
-    if (pthread_join(g->thread1, NULL)) {
-		exit(0);
-    }
-
-
+	ft_setimage(g);
 	while (x < W)
 	{
 		init_algo(g, x);
@@ -150,6 +140,4 @@ void	*ft_start_algo(void *p)
 		x++;
 	}
 	affiche(g);
-	p = g;
-	return (NULL);
 }

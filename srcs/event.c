@@ -49,7 +49,7 @@ void	key_pressed_deplace(int kc, t_gen *g, double olddir, double oldplan)
 
 void	key_pressed_color(int kc, t_gen *g)
 {
-	if (kc == 49 && g->block_mouse == 1)
+	if (kc == 49)
 		g->block_mouse = g->block_mouse == 1 ? 0 : 1;
 	if (kc == 89)
 		g->red2++;
